@@ -67,6 +67,19 @@ def upvote
   redirect_to(topics_path)
 end
 
+def dnvote
+  @topic = Topic.find(params[:id])
+  my_vote = @topic.votes.last
+  if ! my_vote.nil?
+    @topic.votes.delete my_vote
+    redirect_to(topics_path)
+  # else
+  #   format.html { redirect_to topics_url, notice: 'Cannot do negative down-votes.' }
+  #   format.json { render :show, status: :ok, location: @topic }  
+  #   redirect_to (topics_path)
+  end
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
